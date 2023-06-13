@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "colors": "^1.4.0",
+    "nfc-pcsc": "^0.8.1"
+  }
+}
