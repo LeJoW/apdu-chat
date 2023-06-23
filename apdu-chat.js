@@ -11,27 +11,28 @@ const chat = new Chat(rl);
 
 const nfc = new NFC(); // optionally you can pass logger
 
+launchInterp(chat);
+
 nfc.on("reader", (reader) => {
-    // disable auto processing
     reader.autoProcessing = false;
 
-    console.log(`${reader.reader.name}  device attached`);
+    chat.vars.readers.push(reader);
 
-    reader.on("card", (card) => {
-        console.log(`${reader.reader.name}  card inserted`, card);
-        launchInterp(chat, reader);
-    });
+    reader.on("card", (card) => {});
 
-    reader.on("card.off", (card) => {
-        console.log(`${reader.reader.name}  card removed`, card);
-    });
+    reader.on("card.off", (card) => {});
 
     reader.on("error", (err) => {
         console.log(`${reader.reader.name}  an error occurred`, err);
     });
 
     reader.on("end", () => {
-        console.log(`${reader.reader.name}  device removed`);
+        if (chat.vars.reader === reader) {
+            chat.vars.reader = undefined;
+        }
+        chat.vars.readers = chat.vars.readers.filter(function (r) {
+            return r != reader;
+        });
     });
 });
 
