@@ -36,8 +36,8 @@ Le principe de fonctionnement est assez simple&nbsp;:
 | `iv`              | iv                        | enregistre le vecteur initial dans les variables          |
 | `dec`             | message                   | décrypte le message via 3DES-CBC (clé, iv enregistrés)    |
 | `enc`             | message                   | crypte le message via 3DES-CBC (clé, iv enregistrés)      |
-| `aes`             | message                   | crypte le message via AES-CBC (clé, iv enregistrés)       |
 | `mac`             | message                   | calcul le MAC du message (3DES-CBC — clé, iv enregistrés) |
+| `mac-aes`         | message                   | calcul le MAC du message (AES-CBC — clé, iv enregistrés)  |
 | `crc32`           | message                   | calcul le CRC32 du message                                |
 | `random`          | taille                    | donne un nombre aléatoire de la taille (en bits)          |
 | `format`          | —                         | affiche le format APDU pour EV3C (sec. 7.10.1)            |
@@ -72,3 +72,5 @@ L’uid est ici `04 3A 21 92 EB 5A 80` (dernière ligne).
     et pas aux couleurs du format APDU
 -   les champs d’en-tête des commandes (`CmdHeader` en jaunes) sont à écrire en inversant l’ordre des octets (champs LSB, sec. 7.3.1.1)
 -   il vaut mieux fermer la connexion avant une commande `CommMode.Full` pour être sur que l’`iv` est réinitialisé à zero.
+-   si l’entrée d’un (dé)cryptage est trop courte, il faut la compléter à droite par des octets nuls.
+    Si c’est un cryptage AES, on complète par 0x80 suivit d’octets nuls (Méth. padd. 2)
