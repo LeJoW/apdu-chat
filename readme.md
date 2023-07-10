@@ -48,17 +48,16 @@ Le principe de fonctionnement est assez simple&nbsp;:
 
 > récupère l’uid d’une carte via `Cmd.GetVersion` (7.4.2.1)
 
-```
-13:43 > readers
+```diff
+> readers
 r0   : HID Global OMNIKEY 5022 Smart Card Reader
-13:43 > select r0
-13:43 HID Global OMNIKEY 5022 Smart Card Reader % 90 60 00 00 00
+> select r0
+> 90 60 00 00 00
 04 01 01 12 00 1A 05 91 AF
-13:44 HID Global OMNIKEY 5022 Smart Card Reader % 90 AF 00 00 00
+> 90 AF 00 00 00
 04 01 01 02 01 1A 05 91 AF
-13:44 HID Global OMNIKEY 5022 Smart Card Reader % 90 AF 00 00 00
+> 90 AF 00 00 00
 04 3A 21 92 EB 5A 80 CE 6A 16 4D 82 40 17 91 00
-$\color{green}{test}$
 ```
 
 L’uid est ici `04 3A 21 92 EB 5A 80` (dernière ligne).
