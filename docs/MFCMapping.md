@@ -21,14 +21,14 @@ Les APDU donnés sont des exemples. Voir la doc.
 
 > `Cmd.SelectApplication` (7.6.3.2)
 
-> **Warning** La taille du fichier doit être suffisante pour contenir les blocks à associer.
-
 ```diff
 > 90 5A 00 00 03 01 02 03 00
 91 00
 ```
 
 > `Cmd.CreateStdDataFile` (7.7.4.1)
+
+> **Warning** La taille du fichier doit être suffisante pour contenir les blocks à associer.
 
 ```diff
 > 90 CD 00 00 07 01 A1 EE EF 04 00 00 00
