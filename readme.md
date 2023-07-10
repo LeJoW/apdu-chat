@@ -6,7 +6,8 @@
 
 1. prérequis (windows/macOS)
 
-    - `nodejs v20.30.0`
+    - `openssl` OpenSSL 3.1.1 30 May 2023 (Library: OpenSSL 3.1.1 30 May 2023)
+    - `nodejs` v20.30.0
 
 2. installation
     - `git clone 'https://github.com/LeJoW/apdu-chat.git'`
@@ -35,6 +36,7 @@ Le principe de fonctionnement est assez simple&nbsp;:
 | `iv`              | iv                        | enregistre le vecteur initial dans les variables          |
 | `dec`             | message                   | décrypte le message via 3DES-CBC (clé, iv enregistrés)    |
 | `enc`             | message                   | crypte le message via 3DES-CBC (clé, iv enregistrés)      |
+| `aes`             | message                   | crypte le message via AES-CBC (clé, iv enregistrés)       |
 | `mac`             | message                   | calcul le MAC du message (3DES-CBC — clé, iv enregistrés) |
 | `crc32`           | message                   | calcul le CRC32 du message                                |
 | `random`          | taille                    | donne un nombre aléatoire de la taille (en bits)          |
@@ -69,3 +71,4 @@ L’uid est ici `04 3A 21 92 EB 5A 80` (dernière ligne).
 -   dans les tables des modes de communication, les couleurs correspondent aux couleurs du tableau de la commande
     et pas aux couleurs du format APDU
 -   les champs d’en-tête des commandes (`CmdHeader` en jaunes) sont à écrire en inversant l’ordre des octets (champs LSB, sec. 7.3.1.1)
+-   il vaut mieux fermer la connexion avant une commande `CommMode.Full` pour être sur que l’`iv` est réinitialisé à zero.
