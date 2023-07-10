@@ -47,13 +47,13 @@ Les APDU donnés sont des exemples. Voir la doc.
 
 $plaintext = (NewKey \oplus OldKey) | KeyVer | CRC32 | CRC32NK$
 
-| Cryptogram |                                                                | longueur |
-| ---------- | -------------------------------------------------------------- | -------- |
-| NewKey     |                                                                | 16       |
-| OldKey     | $0b0^{128}$                                                    | 16       |
-| KeyVer     | 0x00                                                           | 1        |
-| CRC32      | CRC32( $ 0xC4  \| 0x32 \| (NewKey \oplus OldKey) \| KeyVer $ ) | 4        |
-| CRC32NK    | CRC32(NewKey)                                                  | 4        |
+| Cryptogram |                                                                    | longueur |
+| ---------- | ------------------------------------------------------------------ | -------- |
+| NewKey     |                                                                    | 16       |
+| OldKey     | $0b0^{128}$                                                        | 16       |
+| KeyVer     | 0x00                                                               | 1        |
+| CRC32      | $\text{CRC32}(0xC4  \| 0x32 \| (NewKey \oplus OldKey) \| KeyVer )$ | 4        |
+| CRC32NK    | CRC32(NewKey)                                                      | 4        |
 
 ## 4. Association des blocks classiques
 
@@ -63,14 +63,14 @@ $plaintext = (NewKey \oplus OldKey) | KeyVer | CRC32 | CRC32NK$
 
 > **Warning** Cette commande utilise `CommMode.Full`. Voir la section `Option a: Encryption on command` de la figure 15.
 
-| Commande        |                                                                    |                | longueur |
-| --------------- | ------------------------------------------------------------------ | -------------- | -------- |
-| `Cmd`           | 0xCF                                                               |                | 1        |
-| `FileNo`        |                                                                    |                | 1        |
-| `FileOption`    | 0x00                                                               |                | 1        |
-| `MFCBlocksLen`  | nombre $N$ de blocks à associer                                    |                | 1        |
-| `MFCBlockList`  | liste des $N$ blocks en question                                   |                | N        |
-| `MFCLicense`    | $N$ \| Block $i$ \| BlockOption $i$                                | $i \in [1, N]$ | 1 + 2N   |
+| Commande        |                                                                        |                | longueur |
+| --------------- | ---------------------------------------------------------------------- | -------------- | -------- |
+| `Cmd`           | 0xCF                                                                   |                | 1        |
+| `FileNo`        |                                                                        |                | 1        |
+| `FileOption`    | 0x00                                                                   |                | 1        |
+| `MFCBlocksLen`  | nombre $N$ de blocks à associer                                        |                | 1        |
+| `MFCBlockList`  | liste des $N$ blocks en question                                       |                | N        |
+| `MFCLicense`    | $N$ \| Block $i$ \| BlockOption $i$                                    | $i \in [1, N]$ | 1 + 2N   |
 | `MFCLicenseMAC` | $\text{MAC-AES}_t(KMFCLicenseMAC, 0x01\|MFCLicense\|MFCSectorSecrets)$ |                | 8        |
 
 | MFCLicense      |                                          | longueur |
